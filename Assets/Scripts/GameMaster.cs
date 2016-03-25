@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameMaster : MonoBehaviour {
 	public static GameMaster Instance;
 
 	Target StartPoint;
+	public Text GameStateText;
 
 	void Awake () {
 		if (Instance == null) {
@@ -15,6 +17,12 @@ public class GameMaster : MonoBehaviour {
 	}
 
 	public void SetStartPoint(Target o){
+		if (o != null) {
+			GameStateText.text = "";
+			Camera.main.backgroundColor = Color.black;
+		} else {
+			Camera.main.backgroundColor = Color.white;
+		}
 		StartPoint = o;
 	}
 
@@ -32,11 +40,12 @@ public class GameMaster : MonoBehaviour {
 	void Win(){
 		print ("Win");
 		SetStartPoint (null);
+		GameStateText.text = "Win";
 	}
 
 	void Lose(){
-		
 		print ("Lose");
 		SetStartPoint (null);
+		GameStateText.text = "Lose";
 	}
 }
